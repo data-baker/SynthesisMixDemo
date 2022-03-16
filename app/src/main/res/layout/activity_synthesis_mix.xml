@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SynthesisMixActivity">
+
+    <TextView
+        android:id="@+id/tv_tip1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="待合成文本：" />
+
+    <EditText
+        android:id="@+id/edit"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:text="测试一下，这是混合合成的效果。前面我们学习的挂起函数，它们一次都只能返回一个结果。但在某些业务场景下，我们往往需要协程返回多个结果，比如微信等软件的通道接收的消息，或者是手机定位返回的经纬度坐标需要实时更新。那么，在这些场景下，我们之前学习的协程知识就无法直接解决了。而今天我要讲解的协程中的，就是专门用来做这种事情的。类似的需求，如果我们不使用而是用其他的并发手段配合集合来做的话，其实也能实现，但复杂度会大大增加。那么接下来，我们就一起来学习下。"
+        android:gravity="start"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_tip1" />
+
+    <TextView
+        android:id="@+id/tv_tip2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit"
+        android:layout_marginTop="16dp"
+        android:text="在线声音：" />
+
+    <EditText
+        android:id="@+id/edit_voice"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:text="Lingling"
+        android:gravity="start"
+        android:layout_marginStart="10dp"
+        app:layout_constraintLeft_toRightOf="@id/tv_tip2"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit" />
+
+
+    <TextView
+        android:id="@+id/tv_tip3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_voice"
+        android:layout_marginTop="26dp"
+        android:text="离线声音：" />
+
+    <Spinner
+        android:id="@+id/spinner_voice"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toRightOf="@id/tv_tip3"
+        app:layout_constraintTop_toBottomOf="@id/edit_voice" />
+
+    <Button
+        android:id="@+id/btn_auth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="授权和初始化"
+        android:onClick="onAuthClick"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/btn_synthesis"
+        app:layout_constraintTop_toBottomOf="@id/spinner_voice"/>
+
+    <Button
+        android:id="@+id/btn_synthesis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="合成"
+        android:onClick="onSynthesizerClick"
+        app:layout_constraintLeft_toRightOf="@id/btn_auth"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinner_voice"/>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@android:style/Widget.ProgressBar.Small"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="140dp"
+        android:visibility="invisible"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

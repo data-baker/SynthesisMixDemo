@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".AuthActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="online_clientId："/>
+
+    <EditText
+        android:id="@+id/edit_online_id"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:text=""
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="online_secret："/>
+    <EditText
+        android:id="@+id/edit_online_secret"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:text=""
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="offline_clientId："/>
+    <EditText
+        android:id="@+id/edit_offline_id"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:text=""
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="offline_secret："/>
+    <EditText
+        android:id="@+id/edit_offline_secret"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:text=""
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="40dp"
+            android:onClick="onCleanClick"
+            android:text="清除" />
+
+        <Button
+            android:onClick="onSaveClick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="30dp"
+            android:layout_weight="1"
+            android:text="保存" />
+
+    </LinearLayout>
+
+</LinearLayout>

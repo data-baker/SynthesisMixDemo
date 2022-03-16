@@ -1,0 +1,200 @@
+package com.baker.tts.mix;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.Spinner;
+
+import com.baker.tts.base.component.BakerBaseConstants;
+import com.baker.tts.base.component.HLogger;
+import com.baker.tts.base.component.bean.BakerError;
+import com.baker.tts.base.component.bean.BakerSpeaker;
+import com.baker.tts.mix.lib.SynthesisMixEngine;
+import com.baker.tts.mix.lib.callback.SynthesisMixAuthCallback;
+import com.baker.tts.mix.lib.callback.SynthesizerInitCallback;
+import com.baker.tts.mix.lib.callback.SynthesizerMixMediaCallback;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class SynthesisMixActivity extends BakerBaseActivity {
+    private EditText editText, editVoiceName;
+    private ProgressBar progressBar;
+    private Spinner spinnerOfflineVoiceName;
+    boolean isFirst = true; //仅用作控制onCreate方法执行时，spinner的onItemSelected回调会自动执行一次，首次无效。
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_synthesis_mix);
+        setTitle("Mix合成");
+
+        editText = findViewById(R.id.edit);
+        progressBar = findViewById(R.id.progress);
+        editVoiceName = findViewById(R.id.edit_voice);
+        editVoiceName.setText(SharedPreferencesUtil.getOnlineVoiceName(SynthesisMixActivity.this));
+
+        spinnerOfflineVoiceName = findViewById(R.id.spinner_voice);
+        spinnerOfflineVoiceName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (isFirst){
+                    isFirst = false;
+                    return;
+                }
+                //底层sdk只需要设置列表的索引0-1-2即可
+                SynthesisMixEngine.getInstance().setVoiceNameOffline3(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    @Override
+    public void onBack() {
+        SynthesisMixEngine.getInstance().bakerStopPlay();
+        SynthesisMixEngine.getInstance().release();
+        finish();
+    }
+
+    private SynthesizerMixMediaCallback mediaCallback = new SynthesizerMixMediaCallback() {
+        @Override
+        public void onWarning(String warningCode, String warningMessage) {
+            HLogger.e("--onWarning--");
+        }
+
+        @Override
+        public void playing() {
+            HLogger.e("--playing--");
+        }
+
+        @Override
+        public void noPlay() {
+            HLogger.e("--noPlay--");
+        }
+
+        @Override
+        public void onCompletion() {
+            HLogger.e("--onCompletion--");
+        }
+
+        @Override
+        public void onError(BakerError error) {
+            HLogger.e("--onError--" + error.getCode() + ", " + error.getMessage());
+            toast(error.getCode() + ", " + error.getMessage());
+        }
+    };
+
+    public void onAuthClick(View view) {
+        SynthesisMixEngine.getInstance().firstDoAuthentication(SynthesisMixActivity.this, BakerBaseConstants.SynthesisType.MIX,
+                SharedPreferencesUtil.getOnlineClientId(SynthesisMixActivity.this),
+                SharedPreferencesUtil.getOnlineSecret(SynthesisMixActivity.this),
+                SharedPreferencesUtil.getOfflineClientId(SynthesisMixActivity.this),
+                SharedPreferencesUtil.getOfflineSecret(SynthesisMixActivity.this), new SynthesisMixAuthCallback() {
+                    /**
+                     * @param synthesisType 回调结果表明哪种授权通过了
+                     *                      SynthesisMixConstants.SynthesisType.ONLINE 只有在线合成授权通过
+                     *                      SynthesisMixConstants.SynthesisType.OFFLINE 只有离线合成授权通过
+                     *                      SynthesisMixConstants.SynthesisType.MIX 两种合成授权都通过
+                     */
+                    @Override
+                    public void onSuccess(BakerBaseConstants.SynthesisType synthesisType) {
+                        if (synthesisType == BakerBaseConstants.SynthesisType.MIX || synthesisType == BakerBaseConstants.SynthesisType.OFFLINE) {
+                            initOfflineEngine();
+                        } else {
+                            toast("可以合成，仅在线授权成功");
+                            HLogger.d("可以合成，仅在线授权成功");
+                        }
+                    }
+
+                    @Override
+                    public void onFailed(String errorMsg) {
+                        toast("授权失败：" + errorMsg);
+                        HLogger.d("授权失败：" + errorMsg);
+                    }
+                });
+    }
+
+    private void initOfflineEngine() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                progressBar.setVisibility(View.VISIBLE);
+            }
+        });
+
+        String frontFile = Util.AssetsFileToString(SynthesisMixActivity.this, "tts_entry_1.0.0_release_front_chn_eng_ser.dat");;
+        String backFile = Util.AssetsFileToString(SynthesisMixActivity.this, "tts_entry_1.0.0_release_back_chn_eng_hts_bb_f4180623_jm3_fix.dat");
+        //静静
+        String jingJing_Chn = Util.AssetsFileToString(SynthesisMixActivity.this, "Jingjing/mix005007128_16k_jingjing_100k.tflite.x");
+        String jingJing_Mgvocoder = Util.AssetsFileToString(SynthesisMixActivity.this, "Jingjing/mg16000128_jingjing.tflite.x");
+        //娇娇
+        String jiaoJiao_Chn = Util.AssetsFileToString(SynthesisMixActivity.this, "Jiaojiao/mix005007128_16k_DB-CN-F-06-jiaojiao-small_288k.tflite.x");
+        String jiaoJiao_Mgvocoder = Util.AssetsFileToString(SynthesisMixActivity.this, "Jiaojiao/mg16000128_jiaojiao_tf.tflite.x");
+        //阿科
+        String ake_Chn = Util.AssetsFileToString(SynthesisMixActivity.this, "ake/mix005007128_16k_DB-CN-M-02-ake_240k_small.tflite.x");
+        String ake_Mgvocoder = Util.AssetsFileToString(SynthesisMixActivity.this, "ake/mg16000128_m2_ake.tflite.x");
+
+        List<BakerSpeaker> speakerList = new ArrayList<>();
+        speakerList.add(new BakerSpeaker(jingJing_Chn, jingJing_Mgvocoder));
+        speakerList.add(new BakerSpeaker(jiaoJiao_Chn, jiaoJiao_Mgvocoder));
+        speakerList.add(new BakerSpeaker(ake_Chn, ake_Mgvocoder));
+        SynthesisMixEngine.getInstance().secondInitMixEngine(frontFile, backFile, speakerList, new SynthesizerInitCallback() {
+            @Override
+            public void onSuccess() {
+                dismissProgress();
+                showOfflineVoiceNameSpinner();
+                toast("授权和初始化成功");
+                HLogger.d("授权和初始化成功");
+            }
+
+            @Override
+            public void onTaskFailed(BakerError error) {
+                dismissProgress();
+                toast("初始化失败：" + error.getCode() + ", " + error.getMessage() + ", " + error.getTrace_id());
+                HLogger.d("初始化失败：" + error.getCode() + ", " + error.getMessage() + ", " + error.getTrace_id());
+            }
+        });
+    }
+
+    public void onSynthesizerClick(View view) {
+        SynthesisMixEngine.getInstance().setSynthesizerCallback(mediaCallback);
+
+        String voiceName = editVoiceName.getText().toString().trim();
+        SharedPreferencesUtil.saveOnlineVoiceName(SynthesisMixActivity.this, voiceName);
+        SynthesisMixEngine.getInstance().setVoiceNameOnline(voiceName);
+
+        SynthesisMixEngine.getInstance().setVolume(5);
+        SynthesisMixEngine.getInstance().setSpeed(5);
+
+        List<String> stringList = Util.splitText(editText.getText().toString().trim());
+        SynthesisMixEngine.getInstance().startSynthesis(stringList);
+    }
+
+    private void dismissProgress() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                progressBar.setVisibility(View.INVISIBLE);
+            }
+        });
+    }
+
+    private void showOfflineVoiceNameSpinner(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                String[] speakerNames = new String[]{"静静", "娇娇", "阿科"};
+                ArrayAdapter<String> adapter = new ArrayAdapter(SynthesisMixActivity.this, android.R.layout.simple_spinner_item, speakerNames);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerOfflineVoiceName.setAdapter(adapter);
+            }
+        });
+    }
+}
