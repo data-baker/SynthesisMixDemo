@@ -131,20 +131,13 @@ public class SynthesisMixActivity extends BakerBaseActivity {
 
         String frontFile = Util.AssetsFileToString(SynthesisMixActivity.this, "tts_entry_1.0.0_release_front_chn_eng_ser.dat");;
         String backFile = Util.AssetsFileToString(SynthesisMixActivity.this, "tts_entry_1.0.0_release_back_chn_eng_hts_bb_f4180623_jm3_fix.dat");
-        //静静
-        String jingJing_Chn = Util.AssetsFileToString(SynthesisMixActivity.this, "Jingjing/mix005007128_16k_jingjing_100k.tflite.x");
-        String jingJing_Mgvocoder = Util.AssetsFileToString(SynthesisMixActivity.this, "Jingjing/mg16000128_jingjing.tflite.x");
-        //娇娇
-        String jiaoJiao_Chn = Util.AssetsFileToString(SynthesisMixActivity.this, "Jiaojiao/mix005007128_16k_DB-CN-F-06-jiaojiao-small_288k.tflite.x");
-        String jiaoJiao_Mgvocoder = Util.AssetsFileToString(SynthesisMixActivity.this, "Jiaojiao/mg16000128_jiaojiao_tf.tflite.x");
-        //阿科
-        String ake_Chn = Util.AssetsFileToString(SynthesisMixActivity.this, "ake/mix005007128_16k_DB-CN-M-02-ake_240k_small.tflite.x");
-        String ake_Mgvocoder = Util.AssetsFileToString(SynthesisMixActivity.this, "ake/mg16000128_m2_ake.tflite.x");
+
+        //贝茹
+        String beiRu_Chn = Util.AssetsFileToString(SynthesisMixActivity.this, "beiru/mix005007128_16k_DB-CN-F-04_chn9k_eng2k_mix2k_188k.pb.tflite.x");
+        String beiRu_Mgvocoder = Util.AssetsFileToString(SynthesisMixActivity.this, "beiru/mg16000128_f4.pb.tflite.x");
 
         List<BakerSpeaker> speakerList = new ArrayList<>();
-        speakerList.add(new BakerSpeaker(jingJing_Chn, jingJing_Mgvocoder));
-        speakerList.add(new BakerSpeaker(jiaoJiao_Chn, jiaoJiao_Mgvocoder));
-        speakerList.add(new BakerSpeaker(ake_Chn, ake_Mgvocoder));
+        speakerList.add(new BakerSpeaker(beiRu_Chn, beiRu_Mgvocoder));
         SynthesisMixEngine.getInstance().secondInitMixEngine(frontFile, backFile, speakerList, new SynthesizerInitCallback() {
             @Override
             public void onSuccess() {
@@ -190,7 +183,7 @@ public class SynthesisMixActivity extends BakerBaseActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                String[] speakerNames = new String[]{"静静", "娇娇", "阿科"};
+                String[] speakerNames = new String[]{"贝茹"};
                 ArrayAdapter<String> adapter = new ArrayAdapter(SynthesisMixActivity.this, android.R.layout.simple_spinner_item, speakerNames);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinnerOfflineVoiceName.setAdapter(adapter);
