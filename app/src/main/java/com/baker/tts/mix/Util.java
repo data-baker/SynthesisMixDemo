@@ -133,7 +133,7 @@ public class Util {
     public static List<String> splitText(String text) {
         if (!TextUtils.isEmpty(text) && !"null".equals(text)) {
             List<String> resultList = new ArrayList<>();
-            split(resultList, text, 20);
+            split(resultList, text, 200);
             HLogger.d("resultList.size()==" + resultList.size());
             return resultList;
         }
