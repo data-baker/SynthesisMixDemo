@@ -1,7 +1,7 @@
 # compiler: R8
 # compiler_version: 2.1.86
 # min_api: 28
-# pg_map_id: f305284
+# pg_map_id: b0ebf62
 # common_typos_disable
 a.a.a.a.a.a -> b.a.a.a.a.a:
     1:9:void run() -> run
@@ -73,10 +73,10 @@ a.a.a.a.a.g.a -> b.a.a.a.a.g.a:
     1:2:void b(android.content.Context,java.util.List,com.baker.tts.offline.callback.OfflineVoiceNameAuthCallback) -> f
 a.a.a.a.a.g.a$a -> b.a.a.a.a.g.a$a:
     1:5:void onFailure(java.lang.Exception) -> onFailure
-    1:10:void onSuccess(java.lang.Object) -> onSuccess
+    1:9:void onSuccess(com.baker.tts.base.component.bean.Token) -> onSuccess
 a.a.a.a.a.g.a$b -> b.a.a.a.a.g.a$b:
     1:6:void onFailure(java.lang.Exception) -> onFailure
-    1:11:void onSuccess(java.lang.Object) -> onSuccess
+    1:10:void onSuccess(com.baker.tts.base.component.bean.Token) -> onSuccess
 a.a.a.a.a.g.a$c -> b.a.a.a.a.g.a$c:
     1:2:void <clinit>() -> <clinit>
 a.a.a.a.a.g.b -> b.a.a.a.a.g.b:
@@ -89,7 +89,7 @@ a.a.a.a.a.g.d -> b.a.a.a.a.g.d:
     void a(boolean) -> b
 a.a.a.a.a.g.d$a -> b.a.a.a.a.g.d$a:
     1:5:void onFailure(java.lang.Exception) -> onFailure
-    1:9:void onSuccess(java.lang.Object) -> onSuccess
+    1:8:void onSuccess(com.baker.tts.base.component.bean.Token) -> onSuccess
 a.a.a.a.a.g.e -> b.a.a.a.a.g.e:
 a.a.a.a.a.g.f -> b.a.a.a.a.g.f:
 a.a.a.a.a.g.g -> b.a.a.a.a.g.g:
@@ -15336,9 +15336,11 @@ androidx.viewpager2.widget.ViewPager2$SmoothScrollToPosition -> androidx.viewpag
 com.baker.tts.base.component.BakerBaseConstants -> com.baker.tts.base.component.BakerBaseConstants:
     6:26:void <clinit>() -> <clinit>
     5:5:void <init>() -> <init>
-    149:177:com.baker.tts.base.component.bean.BakerError convertEngineErrorToSDKError(long) -> convertEngineErrorToSDKError
-    181:181:boolean isIsDebug() -> isIsDebug
-    185:186:void setIsDebug(boolean) -> setIsDebug
+    155:183:com.baker.tts.base.component.bean.BakerError convertEngineErrorToSDKError(long) -> convertEngineErrorToSDKError
+    195:195:int getSynthesisCacheBufferSize() -> getSynthesisCacheBufferSize
+    187:187:boolean isIsDebug() -> isIsDebug
+    191:192:void setIsDebug(boolean) -> setIsDebug
+    199:200:void setSynthesisCacheBufferSize(int) -> setSynthesisCacheBufferSize
 com.baker.tts.base.component.BakerBaseConstants$SynthesisType -> com.baker.tts.base.component.BakerBaseConstants$SynthesisType:
     11:14:void <clinit>() -> <clinit>
     11:11:void <init>(java.lang.String,int) -> <init>
@@ -15485,13 +15487,13 @@ com.baker.tts.base.component.bean.Token -> com.baker.tts.base.component.bean.Tok
     23:24:void setToken_type(java.lang.String) -> setToken_type
     44:44:java.lang.String toString() -> toString
 com.baker.tts.base.component.net.CommonJSONCallBack -> com.baker.tts.base.component.net.CommonJSONCallBack:
-    22:27:void <init>(com.baker.tts.base.component.net.TokenCallbackListener) -> <init>
-    17:17:com.baker.tts.base.component.net.TokenCallbackListener access$000(com.baker.tts.base.component.net.CommonJSONCallBack) -> access$000
-    31:37:void onFailure(okhttp3.Call,java.io.IOException) -> onFailure
-    42:59:void onResponse(okhttp3.Call,okhttp3.Response) -> onResponse
+    23:28:void <init>(com.baker.tts.base.component.net.TokenCallbackListener) -> <init>
+    18:18:com.baker.tts.base.component.net.TokenCallbackListener access$000(com.baker.tts.base.component.net.CommonJSONCallBack) -> access$000
+    32:38:void onFailure(okhttp3.Call,java.io.IOException) -> onFailure
+    46:61:void onResponse(okhttp3.Call,okhttp3.Response) -> onResponse
 com.baker.tts.base.component.net.CommonJSONCallBack$1 -> com.baker.tts.base.component.net.CommonJSONCallBack$1:
-    31:31:void <init>(com.baker.tts.base.component.net.CommonJSONCallBack,java.io.IOException) -> <init>
-    34:35:void run() -> run
+    32:32:void <init>(com.baker.tts.base.component.net.CommonJSONCallBack,java.io.IOException) -> <init>
+    35:36:void run() -> run
 com.baker.tts.base.component.net.CommonOkHttpClient -> com.baker.tts.base.component.net.CommonOkHttpClient:
     21:64:void <clinit>() -> <clinit>
     20:20:void <init>() -> <init>
@@ -15833,38 +15835,38 @@ com.baker.tts.offline.util.UtilOffline -> com.baker.tts.offline.util.UtilOffline
 com.baker.tts.online.BuildConfig -> com.baker.tts.online.BuildConfig:
     6:6:void <init>() -> <init>
 com.baker.tts.online.OnLineBakerSynthesizer -> com.baker.tts.online.OnLineBakerSynthesizer:
-    28:28:void <init>(com.baker.tts.online.OnLineBakerSynthesizer$1) -> <init>
-    34:92:void <init>() -> <init>
-    28:28:boolean access$200(com.baker.tts.online.OnLineBakerSynthesizer) -> access$200
-    28:28:boolean access$202(com.baker.tts.online.OnLineBakerSynthesizer,boolean) -> access$202
-    28:28:com.baker.tts.base.component.callback.SynthesizerCallback access$300(com.baker.tts.online.OnLineBakerSynthesizer) -> access$300
-    28:28:void access$400(com.baker.tts.online.OnLineBakerSynthesizer) -> access$400
-    28:28:com.baker.tts.base.component.net.WebSocketClient access$500(com.baker.tts.online.OnLineBakerSynthesizer) -> access$500
-    28:28:void access$600(com.baker.tts.online.OnLineBakerSynthesizer) -> access$600
-    28:28:void access$700(com.baker.tts.online.OnLineBakerSynthesizer,com.baker.tts.base.component.bean.BakerError) -> access$700
-    190:193:void closeSocket() -> closeSocket
-    52:52:com.baker.tts.online.OnLineBakerSynthesizer getInstance() -> getInstance
-    196:197:void onDestroy() -> onDestroy
-    261:267:void onFault(com.baker.tts.base.component.bean.BakerError) -> onFault
-    56:90:void send() -> send
-    206:207:void setCallback(com.baker.tts.base.component.callback.SynthesizerCallback) -> setCallback
-    212:220:void setContentStr(java.lang.String) -> setContentStr
-    234:237:void setLanguage(java.lang.String) -> setLanguage
-    254:258:void setPitch(int) -> setPitch
-    240:244:void setSpeed(int) -> setSpeed
-    200:203:void setUrl(java.lang.String) -> setUrl
-    223:231:void setVoiceName(java.lang.String) -> setVoiceName
-    247:251:void setVolume(int) -> setVolume
-    175:187:void start(java.lang.String) -> start
+    23:23:void <init>(com.baker.tts.online.OnLineBakerSynthesizer$1) -> <init>
+    29:87:void <init>() -> <init>
+    23:23:boolean access$200(com.baker.tts.online.OnLineBakerSynthesizer) -> access$200
+    23:23:boolean access$202(com.baker.tts.online.OnLineBakerSynthesizer,boolean) -> access$202
+    23:23:com.baker.tts.base.component.callback.SynthesizerCallback access$300(com.baker.tts.online.OnLineBakerSynthesizer) -> access$300
+    23:23:void access$400(com.baker.tts.online.OnLineBakerSynthesizer) -> access$400
+    23:23:com.baker.tts.base.component.net.WebSocketClient access$500(com.baker.tts.online.OnLineBakerSynthesizer) -> access$500
+    23:23:void access$600(com.baker.tts.online.OnLineBakerSynthesizer) -> access$600
+    23:23:void access$700(com.baker.tts.online.OnLineBakerSynthesizer,com.baker.tts.base.component.bean.BakerError) -> access$700
+    185:188:void closeSocket() -> closeSocket
+    47:47:com.baker.tts.online.OnLineBakerSynthesizer getInstance() -> getInstance
+    191:192:void onDestroy() -> onDestroy
+    256:262:void onFault(com.baker.tts.base.component.bean.BakerError) -> onFault
+    51:85:void send() -> send
+    201:202:void setCallback(com.baker.tts.base.component.callback.SynthesizerCallback) -> setCallback
+    207:215:void setContentStr(java.lang.String) -> setContentStr
+    229:232:void setLanguage(java.lang.String) -> setLanguage
+    249:253:void setPitch(int) -> setPitch
+    235:239:void setSpeed(int) -> setSpeed
+    195:198:void setUrl(java.lang.String) -> setUrl
+    218:226:void setVoiceName(java.lang.String) -> setVoiceName
+    242:246:void setVolume(int) -> setVolume
+    170:182:void start(java.lang.String) -> start
 com.baker.tts.online.OnLineBakerSynthesizer$1 -> com.baker.tts.online.OnLineBakerSynthesizer$1:
-    92:92:void <init>(com.baker.tts.online.OnLineBakerSynthesizer) -> <init>
-    156:171:void onFailure(okhttp3.WebSocket,java.lang.Throwable,okhttp3.Response) -> onFailure
-    104:152:void onMessage(okhttp3.WebSocket,java.lang.String) -> onMessage
-    95:100:void onOpen(okhttp3.WebSocket,okhttp3.Response) -> onOpen
+    87:87:void <init>(com.baker.tts.online.OnLineBakerSynthesizer) -> <init>
+    151:166:void onFailure(okhttp3.WebSocket,java.lang.Throwable,okhttp3.Response) -> onFailure
+    99:147:void onMessage(okhttp3.WebSocket,java.lang.String) -> onMessage
+    90:95:void onOpen(okhttp3.WebSocket,okhttp3.Response) -> onOpen
 com.baker.tts.online.OnLineBakerSynthesizer$InnerClass -> com.baker.tts.online.OnLineBakerSynthesizer$InnerClass:
-    48:48:void <clinit>() -> <clinit>
-    47:47:void <init>() -> <init>
-    47:47:com.baker.tts.online.OnLineBakerSynthesizer access$100() -> access$100
+    43:43:void <clinit>() -> <clinit>
+    42:42:void <init>() -> <init>
+    42:42:com.baker.tts.online.OnLineBakerSynthesizer access$100() -> access$100
 com.baker.tts.online.bean.OnLineBaseSynthesizerResponse -> com.baker.tts.online.bean.OnLineBaseSynthesizerResponse:
     3:3:void <init>() -> <init>
     10:10:int getCode() -> getCode
