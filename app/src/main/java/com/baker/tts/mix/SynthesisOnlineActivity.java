@@ -127,9 +127,11 @@ public class SynthesisOnlineActivity extends BakerBaseActivity {
         String voiceName = editVoiceName.getText().toString().trim();
         SharedPreferencesUtil.saveOnlineVoiceName(SynthesisOnlineActivity.this, voiceName);
         SynthesisMixEngine.getInstance().setVoiceNameOnline(voiceName);
+        SynthesisMixEngine.getInstance().setOnLineConnectTimeOut(3);
 
         SynthesisMixEngine.getInstance().setVolume(5);
         SynthesisMixEngine.getInstance().setSpeed(5);
+        SynthesisMixEngine.getInstance().setPitch(5);
 
         List<String> stringList = Util.splitText(editText.getText().toString().trim());
         SynthesisMixEngine.getInstance().startSynthesis(stringList);

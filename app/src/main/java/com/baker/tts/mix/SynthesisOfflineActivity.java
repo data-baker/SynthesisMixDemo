@@ -158,6 +158,7 @@ public class SynthesisOfflineActivity extends BakerBaseActivity {
 
         SynthesisMixEngine.getInstance().setVolume(5);
         SynthesisMixEngine.getInstance().setSpeed(5);
+        SynthesisMixEngine.getInstance().setPitch(5);
 
         List<String> stringList = Util.splitText(editText.getText().toString().trim());
         SynthesisMixEngine.getInstance().startSynthesis(stringList);
