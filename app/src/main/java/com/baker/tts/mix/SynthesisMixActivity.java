@@ -129,7 +129,8 @@ public class SynthesisMixActivity extends BakerBaseActivity {
             }
         });
 
-        String frontFile = Util.AssetsFileToString(SynthesisMixActivity.this, "tts_entry_1.0.0_release_front_chn_eng_ser.dat");;
+        String frontFile = Util.AssetsFileToString(SynthesisMixActivity.this, "tts_entry_1.0.0_release_front_chn_eng_ser.dat");
+        ;
         String backFile = Util.AssetsFileToString(SynthesisMixActivity.this, "tts_entry_1.0.0_release_back_chn_eng_hts_bb_f4180623_jm3_fix.dat");
 
         //贝茹
