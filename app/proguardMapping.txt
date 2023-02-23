@@ -1,7 +1,7 @@
 # compiler: R8
 # compiler_version: 2.1.86
 # min_api: 29
-# pg_map_id: 9e96b60
+# pg_map_id: 3df148f
 # common_typos_disable
 a.a.a.a.a.a -> a.a.a.a.a.a:
     1:14:void run() -> run
@@ -11,7 +11,7 @@ a.a.a.a.a.d -> a.a.a.a.a.d:
     1:2:void onSuccess() -> onSuccess
 a.a.a.a.a.e -> a.a.a.a.a.e:
     1:1:void onFailed(java.lang.String) -> onFailed
-    1:26:void onSuccess(com.baker.tts.base.component.BakerBaseConstants$SynthesisType) -> onSuccess
+    1:22:void onSuccess(com.baker.tts.base.component.BakerBaseConstants$SynthesisType) -> onSuccess
 a.a.a.a.a.e$a -> a.a.a.a.a.e$a:
     1:3:void onBinaryReceived(byte[],java.lang.String,java.lang.String,boolean) -> onBinaryReceived
     1:5:void onPrepared() -> onPrepared
@@ -15313,12 +15313,12 @@ com.baker.tts.mix.SynthesisMixActivity -> com.baker.tts.mix.SynthesisMixActivity
     23:23:void access$200(com.baker.tts.mix.SynthesisMixActivity) -> N
     23:23:void access$300(com.baker.tts.mix.SynthesisMixActivity) -> O
     23:23:android.widget.Spinner access$400(com.baker.tts.mix.SynthesisMixActivity) -> P
-    176:182:void dismissProgress() -> Q
-    125:157:void initOfflineEngine() -> R
-    185:194:void showOfflineVoiceNameSpinner() -> S
+    177:183:void dismissProgress() -> Q
+    125:158:void initOfflineEngine() -> R
+    186:195:void showOfflineVoiceNameSpinner() -> S
     95:122:void onAuthClick(android.view.View) -> onAuthClick
     31:57:void onCreate(android.os.Bundle) -> onCreate
-    160:173:void onSynthesizerClick(android.view.View) -> onSynthesizerClick
+    161:174:void onSynthesizerClick(android.view.View) -> onSynthesizerClick
 com.baker.tts.mix.SynthesisMixActivity$1 -> com.baker.tts.mix.SynthesisMixActivity$a:
     com.baker.tts.mix.SynthesisMixActivity this$0 -> a
     41:41:void <init>(com.baker.tts.mix.SynthesisMixActivity) -> <init>
@@ -15343,17 +15343,17 @@ com.baker.tts.mix.SynthesisMixActivity$4 -> com.baker.tts.mix.SynthesisMixActivi
     128:129:void run() -> run
 com.baker.tts.mix.SynthesisMixActivity$5 -> com.baker.tts.mix.SynthesisMixActivity$e:
     com.baker.tts.mix.SynthesisMixActivity this$0 -> a
-    141:141:void <init>(com.baker.tts.mix.SynthesisMixActivity) -> <init>
-    144:148:void onSuccess() -> onSuccess
-    152:155:void onTaskFailed(com.baker.tts.base.component.bean.BakerError) -> onTaskFailed
+    142:142:void <init>(com.baker.tts.mix.SynthesisMixActivity) -> <init>
+    145:149:void onSuccess() -> onSuccess
+    153:156:void onTaskFailed(com.baker.tts.base.component.bean.BakerError) -> onTaskFailed
 com.baker.tts.mix.SynthesisMixActivity$6 -> com.baker.tts.mix.SynthesisMixActivity$f:
     com.baker.tts.mix.SynthesisMixActivity this$0 -> a
-    176:176:void <init>(com.baker.tts.mix.SynthesisMixActivity) -> <init>
-    179:180:void run() -> run
+    177:177:void <init>(com.baker.tts.mix.SynthesisMixActivity) -> <init>
+    180:181:void run() -> run
 com.baker.tts.mix.SynthesisMixActivity$7 -> com.baker.tts.mix.SynthesisMixActivity$g:
     com.baker.tts.mix.SynthesisMixActivity this$0 -> a
-    185:185:void <init>(com.baker.tts.mix.SynthesisMixActivity) -> <init>
-    188:192:void run() -> run
+    186:186:void <init>(com.baker.tts.mix.SynthesisMixActivity) -> <init>
+    189:193:void run() -> run
 com.baker.tts.mix.SynthesisOfflineActivity -> com.baker.tts.mix.SynthesisOfflineActivity:
     android.widget.ProgressBar progressBar -> q
     com.baker.tts.mix.lib.callback.SynthesizerMixMediaCallback mediaCallback -> t
