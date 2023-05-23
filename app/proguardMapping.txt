@@ -1,7 +1,7 @@
 # compiler: R8
 # compiler_version: 2.1.86
 # min_api: 29
-# pg_map_id: 3df148f
+# pg_map_id: b95fd9a
 # common_typos_disable
 a.a.a.a.a.a -> a.a.a.a.a.a:
     1:14:void run() -> run
@@ -11,7 +11,7 @@ a.a.a.a.a.d -> a.a.a.a.a.d:
     1:2:void onSuccess() -> onSuccess
 a.a.a.a.a.e -> a.a.a.a.a.e:
     1:1:void onFailed(java.lang.String) -> onFailed
-    1:22:void onSuccess(com.baker.tts.base.component.BakerBaseConstants$SynthesisType) -> onSuccess
+    1:24:void onSuccess(com.baker.tts.base.component.BakerBaseConstants$SynthesisType) -> onSuccess
 a.a.a.a.a.e$a -> a.a.a.a.a.e$a:
     1:3:void onBinaryReceived(byte[],java.lang.String,java.lang.String,boolean) -> onBinaryReceived
     1:5:void onPrepared() -> onPrepared
@@ -33,10 +33,11 @@ a.a.a.a.a.f -> a.a.a.a.a.f:
     java.util.List j -> h
     java.lang.String e -> c
     java.lang.String d -> b
-    3:4:void a(java.lang.String,java.lang.String) -> b
-    1:2:void a(java.util.List) -> c
-    boolean a(a.a.a.a.a.f,boolean) -> d
-    boolean b(a.a.a.a.a.f,boolean) -> e
+    void a(a.a.a.a.a.f,java.lang.String,java.lang.String) -> b
+    3:4:void a(java.lang.String,java.lang.String) -> c
+    1:2:void a(java.util.List) -> d
+    boolean a(a.a.a.a.a.f,boolean) -> e
+    boolean b(a.a.a.a.a.f,boolean) -> f
 a.a.a.a.a.f$a -> a.a.a.a.a.f$a:
     1:5:void onBinaryReceived(byte[],java.lang.String,java.lang.String,boolean) -> onBinaryReceived
     1:5:void onPrepared() -> onPrepared
@@ -15250,6 +15251,8 @@ com.baker.tts.base.component.net.WebSocketClient -> com.baker.tts.base.component
     72:73:void setCancelSocketNull() -> setCancelSocketNull
     76:83:void start(okhttp3.WebSocketListener) -> start
     86:90:void stop() -> stop
+com.baker.tts.mix.-$$Lambda$SynthesisOfflineActivity$LGd8YC4y7UoSSgecDMnYkOM9WYs -> c.a.a.a.a:
+    com.baker.tts.mix.SynthesisOfflineActivity f$0 -> a
 com.baker.tts.mix.AuthActivity -> com.baker.tts.mix.AuthActivity:
     android.widget.EditText editOfflineSecret -> s
     android.widget.EditText editOfflineId -> r
@@ -15259,14 +15262,14 @@ com.baker.tts.mix.AuthActivity -> com.baker.tts.mix.AuthActivity:
     39:50:void onCleanClick(android.view.View) -> onCleanClick
     14:27:void onCreate(android.os.Bundle) -> onCreate
     30:36:void onSaveClick(android.view.View) -> onSaveClick
-com.baker.tts.mix.BakerBaseActivity -> c.a.a.a.a:
+com.baker.tts.mix.BakerBaseActivity -> c.a.a.a.b:
     android.os.Handler handler -> o
     16:45:void <init>() -> <init>
     36:37:void onBack() -> J
     40:43:void toast(java.lang.String) -> K
     20:23:void onCreate(android.os.Bundle) -> onCreate
     28:32:boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
-com.baker.tts.mix.BakerBaseActivity$1 -> c.a.a.a.a$a:
+com.baker.tts.mix.BakerBaseActivity$1 -> c.a.a.a.b$a:
     com.baker.tts.mix.BakerBaseActivity this$0 -> a
     45:45:void <init>(com.baker.tts.mix.BakerBaseActivity,android.os.Looper) -> <init>
     48:49:void handleMessage(android.os.Message) -> handleMessage
@@ -15283,7 +15286,7 @@ com.baker.tts.mix.MainActivity -> com.baker.tts.mix.MainActivity:
     76:77:void onSynthesisMixClick(android.view.View) -> onSynthesisMixClick
     72:73:void onSynthesisOfflineClick(android.view.View) -> onSynthesisOfflineClick
     68:69:void onSynthesisOnlineClick(android.view.View) -> onSynthesisOnlineClick
-com.baker.tts.mix.SharedPreferencesUtil -> c.a.a.a.b:
+com.baker.tts.mix.SharedPreferencesUtil -> c.a.a.a.c:
     android.content.SharedPreferences mSharedPreferences -> a
     108:111:java.lang.String getOfflineClientId(android.content.Context) -> a
     115:118:java.lang.String getOfflineSecret(android.content.Context) -> b
@@ -15367,12 +15370,15 @@ com.baker.tts.mix.SynthesisOfflineActivity -> com.baker.tts.mix.SynthesisOffline
     23:23:void access$200(com.baker.tts.mix.SynthesisOfflineActivity) -> N
     23:23:void access$300(com.baker.tts.mix.SynthesisOfflineActivity) -> O
     23:23:android.widget.Spinner access$400(com.baker.tts.mix.SynthesisOfflineActivity) -> P
-    168:174:void dismissProgress() -> Q
+    168:169:void dismissProgress() -> Q
     116:150:void initOfflineEngine() -> R
-    177:186:void showOfflineVoiceNameSpinner() -> S
+    168:168:void lambda$dismissProgress$0() -> S
+    void lambda$dismissProgress$0$SynthesisOfflineActivity() -> T
+    175:184:void showOfflineVoiceNameSpinner() -> U
     93:113:void onAuthClick(android.view.View) -> onAuthClick
     31:55:void onCreate(android.os.Bundle) -> onCreate
     154:154:void onInitClick(android.view.View) -> onInitClick
+    172:173:void onStopClick(android.view.View) -> onStopClick
     157:165:void onSynthesizerClick(android.view.View) -> onSynthesizerClick
 com.baker.tts.mix.SynthesisOfflineActivity$1 -> com.baker.tts.mix.SynthesisOfflineActivity$a:
     com.baker.tts.mix.SynthesisOfflineActivity this$0 -> a
@@ -15403,12 +15409,8 @@ com.baker.tts.mix.SynthesisOfflineActivity$5 -> com.baker.tts.mix.SynthesisOffli
     145:148:void onTaskFailed(com.baker.tts.base.component.bean.BakerError) -> onTaskFailed
 com.baker.tts.mix.SynthesisOfflineActivity$6 -> com.baker.tts.mix.SynthesisOfflineActivity$f:
     com.baker.tts.mix.SynthesisOfflineActivity this$0 -> a
-    168:168:void <init>(com.baker.tts.mix.SynthesisOfflineActivity) -> <init>
-    171:172:void run() -> run
-com.baker.tts.mix.SynthesisOfflineActivity$7 -> com.baker.tts.mix.SynthesisOfflineActivity$g:
-    com.baker.tts.mix.SynthesisOfflineActivity this$0 -> a
-    177:177:void <init>(com.baker.tts.mix.SynthesisOfflineActivity) -> <init>
-    180:184:void run() -> run
+    175:175:void <init>(com.baker.tts.mix.SynthesisOfflineActivity) -> <init>
+    178:182:void run() -> run
 com.baker.tts.mix.SynthesisOnlineActivity -> com.baker.tts.mix.SynthesisOnlineActivity:
     com.baker.tts.mix.lib.callback.SynthesizerMixMediaCallback mediaCallback -> r
     android.widget.EditText editVoiceName -> q
@@ -15440,7 +15442,7 @@ com.baker.tts.mix.SynthesisOnlineActivity$3 -> com.baker.tts.mix.SynthesisOnline
     100:100:void <init>(com.baker.tts.mix.SynthesisOnlineActivity) -> <init>
     115:117:void onFailed(java.lang.String) -> onFailed
     109:111:void onSuccess(com.baker.tts.base.component.BakerBaseConstants$SynthesisType) -> onSuccess
-com.baker.tts.mix.Util -> c.a.a.a.c:
+com.baker.tts.mix.Util -> c.a.a.a.d:
     33:37:java.lang.String AssetsFileToString(android.content.Context,java.lang.String) -> a
     64:100:java.lang.String AssetsFileToString(android.content.Context,java.lang.String,boolean) -> b
     122:125:void close(java.io.Closeable) -> c
@@ -15452,7 +15454,6 @@ com.baker.tts.mix.lib.SynthesisMixEngine -> com.baker.tts.mix.lib.SynthesisMixEn
     1:3:void bakerPause() -> bakerPause
     1:3:void bakerPlay() -> bakerPlay
     1:3:void bakerStopPlay() -> bakerStopPlay
-    1:1:void cancelSynthesis() -> cancelSynthesis
     1:2:void firstDoAuthentication(android.content.Context,com.baker.tts.base.component.BakerBaseConstants$SynthesisType,java.lang.String,java.lang.String,java.lang.String,java.lang.String,com.baker.tts.mix.lib.callback.SynthesisMixAuthCallback) -> firstDoAuthentication
     1:1:com.baker.tts.mix.lib.SynthesisMixEngine getInstance() -> getInstance
     1:1:void release() -> release
@@ -15469,8 +15470,8 @@ com.baker.tts.mix.lib.SynthesisMixEngine -> com.baker.tts.mix.lib.SynthesisMixEn
     1:1:void setVoiceNameOffline3(int) -> setVoiceNameOffline3
     1:1:void setVoiceNameOnline(java.lang.String) -> setVoiceNameOnline
     1:1:void setVolume(int) -> setVolume
-    1:1:void startSynthesis(java.lang.String) -> startSynthesis
-com.baker.tts.mix.lib.auth.AuthorizationOnLine -> c.a.a.a.d.a.a:
+    1:5:void startSynthesis(java.lang.String) -> startSynthesis
+com.baker.tts.mix.lib.auth.AuthorizationOnLine -> c.a.a.a.e.a.a:
     a.a.a.a.a.h.b listener -> b
     java.lang.String mClientId -> c
     int retryCount -> a
@@ -15481,59 +15482,62 @@ com.baker.tts.mix.lib.auth.AuthorizationOnLine -> c.a.a.a.d.a.a:
     void access$200(boolean) -> d
     void authentication(boolean) -> e
     void doOnlineAuthentication(android.content.Context,java.lang.String,java.lang.String,a.a.a.a.a.h.b) -> f
-com.baker.tts.mix.lib.auth.AuthorizationOnLine$a -> c.a.a.a.d.a.a$a:
+com.baker.tts.mix.lib.auth.AuthorizationOnLine$a -> c.a.a.a.e.a.a$a:
 com.baker.tts.offline.BuildConfig -> com.baker.tts.offline.BuildConfig:
     6:6:void <init>() -> <init>
 com.baker.tts.offline.SynthesisOfflineEngine -> com.baker.tts.offline.SynthesisOfflineEngine:
-    26:26:void <init>(com.baker.tts.offline.SynthesisOfflineEngine$1) -> <init>
-    30:153:void <init>() -> <init>
-    26:26:void access$1100(com.baker.tts.offline.SynthesisOfflineEngine,com.baker.tts.base.component.bean.BakerError) -> access$1100
-    26:26:void access$1200(com.baker.tts.offline.SynthesisOfflineEngine,int) -> access$1200
-    26:26:void access$1300(com.baker.tts.offline.SynthesisOfflineEngine,java.lang.String,java.lang.String) -> access$1300
-    26:26:void access$200(com.baker.tts.offline.SynthesisOfflineEngine,java.lang.String,java.lang.String,com.baker.tts.offline.callback.SynthesizerOfflineInitCallback) -> access$200
-    26:26:com.baker.tts.offline.bean.BakerTtsAttention access$300(com.baker.tts.offline.SynthesisOfflineEngine) -> access$300
-    26:26:com.baker.tts.offline.bean.BakerTtsAttention access$302(com.baker.tts.offline.SynthesisOfflineEngine,com.baker.tts.offline.bean.BakerTtsAttention) -> access$302
-    26:26:android.content.Context access$400(com.baker.tts.offline.SynthesisOfflineEngine) -> access$400
-    26:26:long[] access$500(com.baker.tts.offline.SynthesisOfflineEngine) -> access$500
-    26:26:long access$602(com.baker.tts.offline.SynthesisOfflineEngine,long) -> access$602
-    26:26:java.lang.String access$700(com.baker.tts.offline.SynthesisOfflineEngine) -> access$700
-    26:26:com.baker.tts.base.component.callback.SynthesizerCallback access$900(com.baker.tts.offline.SynthesisOfflineEngine) -> access$900
-    279:283:void cancelSynthesize() -> cancelSynthesize
-    286:287:void changeSynthesizeStatus(int) -> changeSynthesizeStatus
-    361:371:int convert(int) -> convert
-    56:56:com.baker.tts.offline.SynthesisOfflineEngine getInstance() -> getInstance
-    60:124:void initEngine(android.content.Context,java.lang.String,java.lang.String,java.util.List,com.baker.tts.offline.callback.SynthesizerOfflineInitCallback) -> initEngine
-    438:449:void onDestroy() -> onDestroy
-    409:411:void setDeBug() -> setDeBug
-    290:302:void setLanguage(int) -> setLanguage
-    346:358:void setPitch(int) -> setPitch
-    328:340:void setSpeed(int) -> setSpeed
-    403:406:void setText(java.lang.String) -> setText
-    377:395:void setVoice(int) -> setVoice
-    310:322:void setVolume(int) -> setVolume
-    130:151:void startSynthesizer(com.baker.tts.base.component.callback.SynthesizerCallback) -> startSynthesizer
-    414:417:void throwError(com.baker.tts.base.component.bean.BakerError) -> throwError
-    426:429:void throwError(java.lang.String,java.lang.String) -> throwError
-    432:435:void throwError(java.lang.String,java.lang.String,java.lang.String) -> throwError
-    420:423:void throwInitError(java.lang.String,java.lang.String,com.baker.tts.offline.callback.SynthesizerOfflineInitCallback) -> throwInitError
+    30:30:void <init>(com.baker.tts.offline.SynthesisOfflineEngine$1) -> <init>
+    34:156:void <init>() -> <init>
+    30:30:com.baker.tts.base.component.callback.SynthesizerCallback access$1000(com.baker.tts.offline.SynthesisOfflineEngine) -> access$1000
+    30:30:boolean access$1202(com.baker.tts.offline.SynthesisOfflineEngine,boolean) -> access$1202
+    30:30:void access$1300(com.baker.tts.offline.SynthesisOfflineEngine,com.baker.tts.base.component.bean.BakerError) -> access$1300
+    30:30:void access$1400(com.baker.tts.offline.SynthesisOfflineEngine,int) -> access$1400
+    30:30:void access$1500(com.baker.tts.offline.SynthesisOfflineEngine,java.lang.String,java.lang.String) -> access$1500
+    30:30:void access$200(com.baker.tts.offline.SynthesisOfflineEngine,java.lang.String,java.lang.String,com.baker.tts.offline.callback.SynthesizerOfflineInitCallback) -> access$200
+    30:30:com.baker.tts.offline.bean.BakerTtsAttention access$300(com.baker.tts.offline.SynthesisOfflineEngine) -> access$300
+    30:30:com.baker.tts.offline.bean.BakerTtsAttention access$302(com.baker.tts.offline.SynthesisOfflineEngine,com.baker.tts.offline.bean.BakerTtsAttention) -> access$302
+    30:30:android.content.Context access$400(com.baker.tts.offline.SynthesisOfflineEngine) -> access$400
+    30:30:long[] access$500(com.baker.tts.offline.SynthesisOfflineEngine) -> access$500
+    30:30:long access$602(com.baker.tts.offline.SynthesisOfflineEngine,long) -> access$602
+    30:30:java.lang.String access$700(com.baker.tts.offline.SynthesisOfflineEngine) -> access$700
+    30:30:com.baker.tts.offline.SynthesisOfflineEngine$SynthesizeTask access$800(com.baker.tts.offline.SynthesisOfflineEngine) -> access$800
+    292:297:void cancelSynthesize() -> cancelSynthesize
+    307:308:void changeSynthesizeStatus(int) -> changeSynthesizeStatus
+    382:392:int convert(int) -> convert
+    60:60:com.baker.tts.offline.SynthesisOfflineEngine getInstance() -> getInstance
+    64:128:void initEngine(android.content.Context,java.lang.String,java.lang.String,java.util.List,com.baker.tts.offline.callback.SynthesizerOfflineInitCallback) -> initEngine
+    459:470:void onDestroy() -> onDestroy
+    430:432:void setDeBug() -> setDeBug
+    311:323:void setLanguage(int) -> setLanguage
+    367:379:void setPitch(int) -> setPitch
+    349:361:void setSpeed(int) -> setSpeed
+    424:427:void setText(java.lang.String) -> setText
+    398:416:void setVoice(int) -> setVoice
+    331:343:void setVolume(int) -> setVolume
+    133:154:void startSynthesizer(com.baker.tts.base.component.callback.SynthesizerCallback) -> startSynthesizer
+    300:304:void stopSynthesize() -> stopSynthesize
+    435:438:void throwError(com.baker.tts.base.component.bean.BakerError) -> throwError
+    447:450:void throwError(java.lang.String,java.lang.String) -> throwError
+    453:456:void throwError(java.lang.String,java.lang.String,java.lang.String) -> throwError
+    441:444:void throwInitError(java.lang.String,java.lang.String,com.baker.tts.offline.callback.SynthesizerOfflineInitCallback) -> throwInitError
 com.baker.tts.offline.SynthesisOfflineEngine$1 -> com.baker.tts.offline.SynthesisOfflineEngine$1:
-    61:61:void <init>(com.baker.tts.offline.SynthesisOfflineEngine,java.lang.String,com.baker.tts.offline.callback.SynthesizerOfflineInitCallback,java.util.List,java.lang.String) -> <init>
-    65:122:void run() -> run
+    65:65:void <init>(com.baker.tts.offline.SynthesisOfflineEngine,java.lang.String,com.baker.tts.offline.callback.SynthesizerOfflineInitCallback,java.util.List,java.lang.String) -> <init>
+    69:126:void run() -> run
 com.baker.tts.offline.SynthesisOfflineEngine$InnerClass -> com.baker.tts.offline.SynthesisOfflineEngine$InnerClass:
-    52:52:void <clinit>() -> <clinit>
-    51:51:void <init>() -> <init>
-    51:51:com.baker.tts.offline.SynthesisOfflineEngine access$100() -> access$100
+    56:56:void <clinit>() -> <clinit>
+    55:55:void <init>() -> <init>
+    55:55:com.baker.tts.offline.SynthesisOfflineEngine access$100() -> access$100
 com.baker.tts.offline.SynthesisOfflineEngine$SynthesizeTask -> com.baker.tts.offline.SynthesisOfflineEngine$SynthesizeTask:
-    157:162:void <init>(com.baker.tts.offline.SynthesisOfflineEngine) -> <init>
-    155:155:boolean access$1000(com.baker.tts.offline.SynthesisOfflineEngine$SynthesizeTask) -> access$1000
-    155:155:boolean access$1002(com.baker.tts.offline.SynthesisOfflineEngine$SynthesizeTask,boolean) -> access$1002
-    155:155:boolean access$800(com.baker.tts.offline.SynthesisOfflineEngine$SynthesizeTask) -> access$800
-    274:275:void cancel() -> cancel
-    172:271:void run() -> run
+    160:165:void <init>(com.baker.tts.offline.SynthesisOfflineEngine) -> <init>
+    158:158:boolean access$1100(com.baker.tts.offline.SynthesisOfflineEngine$SynthesizeTask) -> access$1100
+    158:158:boolean access$1102(com.baker.tts.offline.SynthesisOfflineEngine$SynthesizeTask,boolean) -> access$1102
+    158:158:boolean access$900(com.baker.tts.offline.SynthesisOfflineEngine$SynthesizeTask) -> access$900
+    287:288:void cancel() -> cancel
+    175:284:void run() -> run
 com.baker.tts.offline.SynthesisOfflineEngine$SynthesizeTask$1 -> com.baker.tts.offline.SynthesisOfflineEngine$SynthesizeTask$1:
-    183:183:void <init>(com.baker.tts.offline.SynthesisOfflineEngine$SynthesizeTask) -> <init>
-    186:212:int onAudioDataResult(byte[]) -> onAudioDataResult
-    224:238:int onIntervalInfoResult(java.lang.String) -> onIntervalInfoResult
+    187:187:void <init>(com.baker.tts.offline.SynthesisOfflineEngine$SynthesizeTask) -> <init>
+    190:219:int onAudioDataResult(byte[]) -> onAudioDataResult
+    224:248:int onIntervalInfoResult(java.lang.String) -> onIntervalInfoResult
 com.baker.tts.offline.SynthesisOfflineJni -> com.baker.tts.offline.SynthesisOfflineJni:
     10:17:void <clinit>() -> <clinit>
     5:5:void <init>() -> <init>

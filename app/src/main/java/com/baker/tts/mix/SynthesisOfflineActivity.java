@@ -165,14 +165,12 @@ public class SynthesisOfflineActivity extends BakerBaseActivity {
     }
 
     private void dismissProgress() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                progressBar.setVisibility(View.INVISIBLE);
-            }
-        });
+        runOnUiThread(() -> progressBar.setVisibility(View.INVISIBLE));
     }
 
+    public void onStopClick(View view){
+        SynthesisMixEngine.getInstance().bakerStopPlay();
+    }
     private void showOfflineVoiceNameSpinner() {
         runOnUiThread(new Runnable() {
             @Override
