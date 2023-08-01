@@ -41,7 +41,7 @@ public class SynthesisMixActivity extends BakerBaseActivity {
         spinnerOfflineVoiceName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (isFirst){
+                if (isFirst) {
                     isFirst = false;
                     return;
                 }
@@ -56,11 +56,11 @@ public class SynthesisMixActivity extends BakerBaseActivity {
         });
     }
 
+
     @Override
-    public void onBack() {
+    public void onBackPressed() {
+        super.onBackPressed();
         SynthesisMixEngine.getInstance().bakerStopPlay();
-        SynthesisMixEngine.getInstance().release();
-        finish();
     }
 
     private SynthesizerMixMediaCallback mediaCallback = new SynthesizerMixMediaCallback() {
@@ -122,24 +122,24 @@ public class SynthesisMixActivity extends BakerBaseActivity {
     }
 
     private void initOfflineEngine() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                progressBar.setVisibility(View.VISIBLE);
-            }
-        });
+        runOnUiThread(() -> progressBar.setVisibility(View.VISIBLE));
 
-        String frontFile = Util.AssetsFileToString(SynthesisMixActivity.this, "tts_entry_1.0.0_release_front_chn_eng_ser.dat");
-        ;
-        String backFile = Util.AssetsFileToString(SynthesisMixActivity.this, "tts_entry_1.0.0_release_back_chn_eng_hts_bb_f4180623_jm3_fix.dat");
+        String frontFile = Util.AssetsFileToString(this, "tts_entry_1.0.0_release_front_chn_eng_ser.dat");
+        String backFile = Util.AssetsFileToString(this, "tts_entry_1.0.0_release_back_chn_eng_hts_bb_f4180623_jm3_fix.dat");
 
         //贝茹
-        String beiRu_Chn = Util.AssetsFileToString(SynthesisMixActivity.this, "beiru/mix005007128_16k_DB-CN-F-04_chn9k_eng2k_mix2k_188k.pb.tflite.x");
-        String beiRu_Mgvocoder = Util.AssetsFileToString(SynthesisMixActivity.this, "beiru/mg16000128_f4.pb.tflite.x");
+        String beiRu_Chn = Util.AssetsFileToString(this, "beiru/mix005007128_16k_DB-CN-F-04_chn9k_eng2k_mix2k_188k.pb.tflite.x");
+        String beiRu_Mgvocoder = Util.AssetsFileToString(this, "beiru/mg16000128_f4.pb.tflite.x");
+
+        //贝鹤
+        String beiHe_Chn = Util.AssetsFileToString(this, "beihe/mix005007128_16k_DB-CN-M-11_chn21k_175k.pb.tflite.x");
+        String beiHe_Mgvocoder = Util.AssetsFileToString(this, "beihe/mg16000128_m11.pb.tflite.x");
+
 
         List<BakerSpeaker> speakerList = new ArrayList<>();
         speakerList.add(new BakerSpeaker(beiRu_Chn, beiRu_Mgvocoder));
-        SynthesisMixEngine.getInstance().secondInitMixEngine(frontFile, backFile, speakerList, new SynthesizerInitCallback() {
+        speakerList.add(new BakerSpeaker(beiHe_Chn, beiHe_Mgvocoder));
+        SynthesisMixEngine.getInstance().secondInitMixEngine(new String[]{frontFile}, new String[]{backFile}, speakerList, new SynthesizerInitCallback() {
             @Override
             public void onSuccess() {
                 dismissProgress();
@@ -157,7 +157,7 @@ public class SynthesisMixActivity extends BakerBaseActivity {
         });
     }
 
-    public void onSynthesizerClick(View view) {
+    public void onParamsClick(View view) {
         SynthesisMixEngine.getInstance().setSynthesizerCallback(mediaCallback);
 
         String voiceName = editVoiceName.getText().toString().trim();
@@ -168,29 +168,35 @@ public class SynthesisMixActivity extends BakerBaseActivity {
         SynthesisMixEngine.getInstance().setVolume(5);
         SynthesisMixEngine.getInstance().setSpeed(5);
         SynthesisMixEngine.getInstance().setPitch(5);
+    }
 
+    public void onSynthesizerClick(View view) {
         List<String> stringList = Util.splitText(editText.getText().toString().trim());
         SynthesisMixEngine.getInstance().startSynthesis(stringList);
     }
 
-    private void dismissProgress() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                progressBar.setVisibility(View.INVISIBLE);
-            }
-        });
+    public void onStopClick(View view) {
+        SynthesisMixEngine.getInstance().bakerStopPlay();
     }
 
-    private void showOfflineVoiceNameSpinner(){
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                String[] speakerNames = new String[]{"贝茹"};
-                ArrayAdapter<String> adapter = new ArrayAdapter(SynthesisMixActivity.this, android.R.layout.simple_spinner_item, speakerNames);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinnerOfflineVoiceName.setAdapter(adapter);
-            }
+    public void onPauseClick(View view) {
+        SynthesisMixEngine.getInstance().bakerPause();
+    }
+
+    public void onResumeClick(View view) {
+        SynthesisMixEngine.getInstance().resumeSynthesis();
+    }
+
+    private void dismissProgress() {
+        runOnUiThread(() -> progressBar.setVisibility(View.INVISIBLE));
+    }
+
+    private void showOfflineVoiceNameSpinner() {
+        runOnUiThread(() -> {
+            String[] speakerNames = new String[]{"贝茹", "贝鹤"};
+            ArrayAdapter<String> adapter = new ArrayAdapter(SynthesisMixActivity.this, android.R.layout.simple_spinner_item, speakerNames);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinnerOfflineVoiceName.setAdapter(adapter);
         });
     }
 }

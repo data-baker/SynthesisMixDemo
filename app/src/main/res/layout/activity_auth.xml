@@ -12,50 +12,46 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="online_clientId："/>
+        android:text="online_clientId：" />
 
     <EditText
         android:id="@+id/edit_online_id"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:text=""
-        />
+        android:layout_height="80dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="online_secret："/>
+        android:text="online_secret：" />
+
     <EditText
         android:id="@+id/edit_online_secret"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:text=""
-        />
+        android:text="" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="offline_clientId："/>
+        android:text="offline_clientId：" />
+
     <EditText
         android:id="@+id/edit_offline_id"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:text=""
-        />
+        android:layout_height="80dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="offline_secret："/>
+        android:text="offline_secret：" />
+
     <EditText
         android:id="@+id/edit_offline_secret"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:text=""
-        />
+        android:layout_height="80dp"/>
 
 
     <LinearLayout
@@ -65,19 +61,19 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="40dp"
+            android:layout_weight="1"
             android:onClick="onCleanClick"
             android:text="清除" />
 
         <Button
-            android:onClick="onSaveClick"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginTop="30dp"
             android:layout_weight="1"
+            android:onClick="onSaveClick"
             android:text="保存" />
 
     </LinearLayout>

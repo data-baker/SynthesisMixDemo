@@ -26,12 +26,16 @@ public class SynthesisOnlineActivity extends BakerBaseActivity {
         editText = findViewById(R.id.edit);
         editVoiceName = findViewById(R.id.edit_voice);
         editVoiceName.setText(SharedPreferencesUtil.getOnlineVoiceName(SynthesisOnlineActivity.this));
+        if (editVoiceName.getText().toString().length() == 0) {
+            editVoiceName.setText("JiaoJiao");
+        }
     }
 
+
     @Override
-    public void onBack() {
+    public void onBackPressed() {
+        super.onBackPressed();
         SynthesisMixEngine.getInstance().bakerStopPlay();
-        finish();
     }
 
     private SynthesizerMixMediaCallback mediaCallback = new SynthesizerMixMediaCallback() {
@@ -62,37 +66,6 @@ public class SynthesisOnlineActivity extends BakerBaseActivity {
         }
     };
 
-    private SynthesisMixCallback synthesisMixCallback = new SynthesisMixCallback() {
-        @Override
-        public void onSynthesisStarted() {
-            HLogger.e("--onSynthesisCompleted--");
-        }
-
-        @Override
-        public void onPrepared() {
-            HLogger.e("--onSynthesisCompleted--");
-        }
-
-        @Override
-        public void onBinaryReceived(byte[] data, String interval, String interval_x, boolean endFlag) {
-            HLogger.e("--onBinaryReceived--, endFlag = " + endFlag + ", interval_x" + interval_x);
-        }
-
-        @Override
-        public void onSynthesisCompleted() {
-            HLogger.e("--onSynthesisCompleted--");
-        }
-
-        @Override
-        public void onWarning(String warningCode, String warningMessage) {
-            HLogger.e("--onSynthesisCompleted--warningCode = " + warningCode + ", warningMessage = " + warningMessage);
-        }
-
-        @Override
-        public void onTaskFailed(BakerError error) {
-            HLogger.e("--onTaskFailed--error.getCode() = " + error.getCode() + ", error.getMessage() = " + error.getMessage() + ", error.getTrace_id() = " + error.getTrace_id());
-        }
-    };
 
     public void onAuthClick(View view) {
         SynthesisMixEngine.getInstance().firstDoAuthentication(SynthesisOnlineActivity.this, BakerBaseConstants.SynthesisType.ONLINE,
@@ -118,22 +91,32 @@ public class SynthesisOnlineActivity extends BakerBaseActivity {
                 });
     }
 
-    public void onInitClick(View view) {
-    }
-
-    public void onSynthesizerClick(View view) {
-        SynthesisMixEngine.getInstance().setSynthesizerCallback(mediaCallback);
-
+    public void onParamsClick(View view) {
         String voiceName = editVoiceName.getText().toString().trim();
         SharedPreferencesUtil.saveOnlineVoiceName(SynthesisOnlineActivity.this, voiceName);
         SynthesisMixEngine.getInstance().setVoiceNameOnline(voiceName);
         SynthesisMixEngine.getInstance().setOnLineConnectTimeOut(3);
-
         SynthesisMixEngine.getInstance().setVolume(5);
         SynthesisMixEngine.getInstance().setSpeed(5);
         SynthesisMixEngine.getInstance().setPitch(5);
+    }
 
+    public void onSynthesizerClick(View view) {
+        SynthesisMixEngine.getInstance().setSynthesizerCallback(mediaCallback);
         List<String> stringList = Util.splitText(editText.getText().toString().trim());
         SynthesisMixEngine.getInstance().startSynthesis(stringList);
+    }
+
+
+    public void onStopClick(View view) {
+        SynthesisMixEngine.getInstance().bakerStopPlay();
+    }
+
+    public void onPauseClick(View view) {
+        SynthesisMixEngine.getInstance().bakerPause();
+    }
+
+    public void onResumeClick(View view) {
+        SynthesisMixEngine.getInstance().resumeSynthesis();
     }
 }

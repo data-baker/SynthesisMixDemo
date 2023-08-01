@@ -1,6 +1,5 @@
 package com.baker.tts.mix;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +23,8 @@ public class AuthActivity extends BakerBaseActivity {
         editOnlineSecret.setText(SharedPreferencesUtil.getOnlineSecret(AuthActivity.this));
         editOfflineId.setText(SharedPreferencesUtil.getOfflineClientId(AuthActivity.this));
         editOfflineSecret.setText(SharedPreferencesUtil.getOfflineSecret(AuthActivity.this));
+
+
     }
 
     public void onSaveClick(View view) {

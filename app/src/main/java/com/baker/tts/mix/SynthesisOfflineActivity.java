@@ -1,6 +1,7 @@
 package com.baker.tts.mix;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -54,14 +55,20 @@ public class SynthesisOfflineActivity extends BakerBaseActivity {
         });
     }
 
+
     @Override
-    public void onBack() {
+    public void onBackPressed() {
+        super.onBackPressed();
         SynthesisMixEngine.getInstance().bakerStopPlay();
-        SynthesisMixEngine.getInstance().release();
-        finish();
     }
 
     private SynthesizerMixMediaCallback mediaCallback = new SynthesizerMixMediaCallback() {
+        @Override
+        public void onPrepared() {
+            super.onPrepared();
+            Log.e("TAG--->", "onPrepared");
+        }
+
         @Override
         public void onWarning(String warningCode, String warningMessage) {
             HLogger.e("--onWarning--");
@@ -69,7 +76,7 @@ public class SynthesisOfflineActivity extends BakerBaseActivity {
 
         @Override
         public void playing() {
-            HLogger.e("--playing--");
+            Log.e("TAG--->", "--playing--");
         }
 
         @Override
@@ -79,7 +86,7 @@ public class SynthesisOfflineActivity extends BakerBaseActivity {
 
         @Override
         public void onCompletion() {
-            HLogger.e("--onCompletion--");
+            Log.e("TAG--->", "--onCompletion--");
         }
 
         @Override
@@ -112,26 +119,32 @@ public class SynthesisOfflineActivity extends BakerBaseActivity {
                 });
     }
 
+    public void onParamsClick(View view) {
+        SynthesisMixEngine.getInstance().setVolume(5);
+        SynthesisMixEngine.getInstance().setSpeed(5);
+        SynthesisMixEngine.getInstance().setPitch(5);
+    }
+
     private void initOfflineEngine() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                progressBar.setVisibility(View.VISIBLE);
-            }
-        });
+        runOnUiThread(() -> progressBar.setVisibility(View.VISIBLE));
 
 
-        String frontFile = Util.AssetsFileToString(SynthesisOfflineActivity.this, "tts_entry_1.0.0_release_front_chn_eng_ser.dat");
-        ;
-        String backFile = Util.AssetsFileToString(SynthesisOfflineActivity.this, "tts_entry_1.0.0_release_back_chn_eng_hts_bb_f4180623_jm3_fix.dat");
+        String frontFile = Util.AssetsFileToString(this, "tts_entry_1.0.0_release_front_chn_eng_ser.dat");
+        String backFile = Util.AssetsFileToString(this, "tts_entry_1.0.0_release_back_chn_eng_hts_bb_f4180623_jm3_fix.dat");
 
         //贝茹
-        String beiRu_Chn = Util.AssetsFileToString(SynthesisOfflineActivity.this, "beiru/mix005007128_16k_DB-CN-F-04_chn9k_eng2k_mix2k_188k.pb.tflite.x");
-        String beiRu_Mgvocoder = Util.AssetsFileToString(SynthesisOfflineActivity.this, "beiru/mg16000128_f4.pb.tflite.x");
+        String beiRu_Chn = Util.AssetsFileToString(this, "beiru/mix005007128_16k_DB-CN-F-04_chn9k_eng2k_mix2k_188k.pb.tflite.x");
+        String beiRu_Mgvocoder = Util.AssetsFileToString(this, "beiru/mg16000128_f4.pb.tflite.x");
+
+        //贝鹤
+        String beiHe_Chn = Util.AssetsFileToString(this, "beihe/mix005007128_16k_DB-CN-M-11_chn21k_175k.pb.tflite.x");
+        String beiHe_Mgvocoder = Util.AssetsFileToString(this, "beihe/mg16000128_m11.pb.tflite.x");
+
 
         List<BakerSpeaker> speakerList = new ArrayList<>();
         speakerList.add(new BakerSpeaker(beiRu_Chn, beiRu_Mgvocoder));
-        SynthesisMixEngine.getInstance().secondInitMixEngine(frontFile, backFile, speakerList, new SynthesizerInitCallback() {
+        speakerList.add(new BakerSpeaker(beiHe_Chn, beiHe_Mgvocoder));
+        SynthesisMixEngine.getInstance().secondInitMixEngine(new String[]{frontFile}, new String[]{backFile}, speakerList, new SynthesizerInitCallback() {
             @Override
             public void onSuccess() {
                 dismissProgress();
@@ -149,17 +162,35 @@ public class SynthesisOfflineActivity extends BakerBaseActivity {
         });
     }
 
-    public void onInitClick(View view) {
+    /**
+     * 暂停按钮点击时间
+     *
+     * @param view 暂停按钮
+     */
+    public void onPauseClick(View view) {
+        SynthesisMixEngine.getInstance().bakerPause();
+    }
 
+    /**
+     * 停止按钮点击时间
+     *
+     * @param view 停止按钮
+     */
+    public void onStopClick(View view) {
+        SynthesisMixEngine.getInstance().bakerStopPlay();
+    }
+
+    /**
+     * 恢复按钮点击事件
+     *
+     * @param view 恢复按钮
+     */
+    public void onResumeClick(View view) {
+        SynthesisMixEngine.getInstance().resumeSynthesis();
     }
 
     public void onSynthesizerClick(View view) {
         SynthesisMixEngine.getInstance().setSynthesizerCallback(mediaCallback);
-
-        SynthesisMixEngine.getInstance().setVolume(5);
-        SynthesisMixEngine.getInstance().setSpeed(5);
-        SynthesisMixEngine.getInstance().setPitch(5);
-
         List<String> stringList = Util.splitText(editText.getText().toString().trim());
         SynthesisMixEngine.getInstance().startSynthesis(stringList);
     }
@@ -168,18 +199,14 @@ public class SynthesisOfflineActivity extends BakerBaseActivity {
         runOnUiThread(() -> progressBar.setVisibility(View.INVISIBLE));
     }
 
-    public void onStopClick(View view){
-        SynthesisMixEngine.getInstance().bakerStopPlay();
-    }
+
+
     private void showOfflineVoiceNameSpinner() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                String[] speakerNames = new String[]{"贝茹"};
-                ArrayAdapter<String> adapter = new ArrayAdapter(SynthesisOfflineActivity.this, android.R.layout.simple_spinner_item, speakerNames);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinnerOfflineVoiceName.setAdapter(adapter);
-            }
+        runOnUiThread(() -> {
+            String[] speakerNames = new String[]{"贝茹", "贝鹤"};
+            ArrayAdapter<String> adapter = new ArrayAdapter(SynthesisOfflineActivity.this, android.R.layout.simple_spinner_item, speakerNames);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinnerOfflineVoiceName.setAdapter(adapter);
         });
     }
 }

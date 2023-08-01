@@ -1,102 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".SynthesisOfflineActivity">
+
     <TextView
         android:id="@+id/tv_tip1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:text="待合成文本：" />
 
     <EditText
         android:id="@+id/edit"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:text="测试一下，这是离线合成的效果。"
         android:gravity="start"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_tip1" />
+        android:text="测试一下，这是离线合成的效果" />
 
-    <TextView
-        android:id="@+id/tv_tip2"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit"
-        android:layout_marginTop="26dp"
-        android:text="离线声音：" />
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
-    <Spinner
-        android:id="@+id/spinner_voice"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintLeft_toRightOf="@id/tv_tip2"
-        app:layout_constraintTop_toBottomOf="@id/edit" />
+        <TextView
+            android:id="@+id/tv_tip2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="离线声音：" />
 
-    <Button
-        android:id="@+id/btn_auth"
-        android:layout_width="wrap_content"
+        <Spinner
+            android:id="@+id/spinner_voice"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="授权和初始化"
-        android:onClick="onAuthClick"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/btn_init"
-        app:layout_constraintTop_toBottomOf="@id/spinner_voice"/>
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btn_stop"
-        android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/btn_auth"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:layout_weight="1"
+            android:onClick="onAuthClick"
+            android:text="初始化" />
+
+        <Button
+            android:id="@+id/btn_params"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:layout_weight="1"
+            android:onClick="onParamsClick"
+            android:text="设置参数" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
-        android:onClick="onStopClick"
-        android:text="暂停"
-        android:visibility="gone"
-        app:layout_constraintHorizontal_bias="0.651"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/btn_init"
-        app:layout_constraintTop_toBottomOf="@id/spinner_voice" />
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btn_init"
-        android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/btn_synthesis"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:layout_weight="1"
+            android:onClick="onSynthesizerClick"
+            android:text="合成" />
+
+
+        <Button
+            android:id="@+id/btn_stop"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:layout_weight="1"
+            android:onClick="onStopClick"
+            android:text="停止" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="初始化"
-        android:onClick="onInitClick"
-        android:visibility="gone"
-        app:layout_constraintLeft_toRightOf="@id/btn_auth"
-        app:layout_constraintRight_toLeftOf="@id/btn_synthesis"
-        app:layout_constraintTop_toBottomOf="@id/spinner_voice"/>
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btn_synthesis"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="合成"
-        android:onClick="onSynthesizerClick"
-        app:layout_constraintLeft_toRightOf="@id/btn_init"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spinner_voice"/>
+        <Button
+            android:id="@+id/btn_pause"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:layout_weight="1"
+            android:onClick="onPauseClick"
+            android:text="暂停" />
 
-    <ProgressBar
-        android:id="@+id/progress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@android:style/Widget.ProgressBar.Small"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="140dp"
-        android:visibility="invisible"/>
+        <Button
+            android:id="@+id/btn_resume"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:layout_weight="1"
+            android:onClick="onResumeClick"
+            android:text="恢复" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/progress"
+            style="@android:style/Widget.ProgressBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="140dp"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+
+</LinearLayout>
