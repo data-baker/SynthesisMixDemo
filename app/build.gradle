@@ -3,13 +3,15 @@ plugins {
 }
 
 android {
-    compileSdkVersion 29
+
+    compileSdkVersion 31
     buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "com.baker.tts.mix"
-        minSdkVersion 21
-        targetSdkVersion 29
+
+        minSdkVersion 23
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
 
@@ -43,7 +45,8 @@ android {
         }
 
         debug {
-            minifyEnabled true
+
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.debug
         }
@@ -55,6 +58,10 @@ android {
 }
 
 dependencies {
+
+    implementation 'org.apache.poi:poi:3.9'
+    implementation 'org.apache.poi:poi-ooxml:3.9'
+    implementation 'com.github.QingDian-Fan:ExcelUtilsProject:1.0.0'
     implementation fileTree(dir: 'libs', include: ['*.aar'])
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
@@ -66,4 +73,5 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.2.2'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'pub.devrel:easypermissions:1.3.0'
+
 }

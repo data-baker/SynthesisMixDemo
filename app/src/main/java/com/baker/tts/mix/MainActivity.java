@@ -2,20 +2,16 @@ package com.baker.tts.mix;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
-
-import pub.devrel.easypermissions.EasyPermissions;
-
-public class MainActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks {
+public class MainActivity extends AppCompatActivity {
     private String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
     @Override
@@ -27,30 +23,13 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
     }
 
     private void getPermission() {
-        if (EasyPermissions.hasPermissions(this, permissions)) {
-            //已经打开权限
-//            handler.sendEmptyMessageDelayed(1, 2000);
-        } else {
-            //没有打开相关权限、申请权限
-            EasyPermissions.requestPermissions(this, "需要获取您的存储权限", 1, permissions);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+
+            requestPermissions(permissions, 10010);
+
         }
-    }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @androidx.annotation.NonNull String[] permissions, @androidx.annotation.NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        //框架要求必须这么写
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
-    }
-
-    @Override
-    public void onPermissionsGranted(int requestCode, @NonNull @NotNull List<String> perms) {
-//        handler.sendEmptyMessageDelayed(1, 2000);
-    }
-
-    @Override
-    public void onPermissionsDenied(int requestCode, @NonNull @NotNull List<String> perms) {
-        Toast.makeText(this, "请同意相关权限，否则部分功能无法使用", Toast.LENGTH_SHORT).show();
     }
 
 

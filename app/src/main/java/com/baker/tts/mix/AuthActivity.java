@@ -5,6 +5,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.EditText;
+
+
 public class AuthActivity extends BakerBaseActivity {
     private EditText editOnlineId, editOnlineSecret, editOfflineId, editOfflineSecret;
 
@@ -19,10 +24,19 @@ public class AuthActivity extends BakerBaseActivity {
         editOfflineId = findViewById(R.id.edit_offline_id);
         editOfflineSecret = findViewById(R.id.edit_offline_secret);
 
-        editOnlineId.setText(SharedPreferencesUtil.getOnlineClientId(AuthActivity.this));
-        editOnlineSecret.setText(SharedPreferencesUtil.getOnlineSecret(AuthActivity.this));
-        editOfflineId.setText(SharedPreferencesUtil.getOfflineClientId(AuthActivity.this));
-        editOfflineSecret.setText(SharedPreferencesUtil.getOfflineSecret(AuthActivity.this));
+        if (!TextUtils.isEmpty(SharedPreferencesUtil.getOnlineClientId(AuthActivity.this))) {
+            editOnlineId.setText(SharedPreferencesUtil.getOnlineClientId(AuthActivity.this));
+        }
+        if (!TextUtils.isEmpty(SharedPreferencesUtil.getOnlineSecret(AuthActivity.this))) {
+            editOnlineSecret.setText(SharedPreferencesUtil.getOnlineSecret(AuthActivity.this));
+        }
+        if (!TextUtils.isEmpty(SharedPreferencesUtil.getOfflineClientId(AuthActivity.this))) {
+            editOfflineId.setText(SharedPreferencesUtil.getOfflineClientId(AuthActivity.this));
+        }
+        if (!TextUtils.isEmpty(SharedPreferencesUtil.getOfflineSecret(AuthActivity.this))) {
+            editOfflineSecret.setText(SharedPreferencesUtil.getOfflineSecret(AuthActivity.this));
+        }
+
 
 
     }

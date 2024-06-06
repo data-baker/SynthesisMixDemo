@@ -9,7 +9,6 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 
 import com.baker.tts.base.component.BakerBaseConstants;
-import com.baker.tts.base.component.HLogger;
 import com.baker.tts.base.component.bean.BakerError;
 import com.baker.tts.base.component.bean.BakerSpeaker;
 import com.baker.tts.mix.lib.SynthesisMixEngine;
@@ -41,12 +40,7 @@ public class SynthesisMixActivity extends BakerBaseActivity {
         spinnerOfflineVoiceName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (isFirst) {
-                    isFirst = false;
-                    return;
-                }
-                //底层sdk只需要设置列表的索引0-1-2即可
-                SynthesisMixEngine.getInstance().setVoiceNameOffline3(position);
+                SynthesisMixEngine.getInstance().setOfflineVoiceName(speakerNames[position]);
             }
 
             @Override
@@ -63,30 +57,25 @@ public class SynthesisMixActivity extends BakerBaseActivity {
         SynthesisMixEngine.getInstance().bakerStopPlay();
     }
 
-    private SynthesizerMixMediaCallback mediaCallback = new SynthesizerMixMediaCallback() {
+    private final SynthesizerMixMediaCallback mediaCallback = new SynthesizerMixMediaCallback() {
         @Override
         public void onWarning(String warningCode, String warningMessage) {
-            HLogger.e("--onWarning--");
         }
 
         @Override
         public void playing() {
-            HLogger.e("--playing--");
         }
 
         @Override
         public void noPlay() {
-            HLogger.e("--noPlay--");
         }
 
         @Override
         public void onCompletion() {
-            HLogger.e("--onCompletion--");
         }
 
         @Override
         public void onError(BakerError error) {
-            HLogger.e("--onError--" + error.getCode() + ", " + error.getMessage());
             toast(error.getCode() + ", " + error.getMessage());
         }
     };
@@ -97,26 +86,18 @@ public class SynthesisMixActivity extends BakerBaseActivity {
                 SharedPreferencesUtil.getOnlineSecret(SynthesisMixActivity.this),
                 SharedPreferencesUtil.getOfflineClientId(SynthesisMixActivity.this),
                 SharedPreferencesUtil.getOfflineSecret(SynthesisMixActivity.this), new SynthesisMixAuthCallback() {
-                    /**
-                     * @param synthesisType 回调结果表明哪种授权通过了
-                     *                      SynthesisMixConstants.SynthesisType.ONLINE 只有在线合成授权通过
-                     *                      SynthesisMixConstants.SynthesisType.OFFLINE 只有离线合成授权通过
-                     *                      SynthesisMixConstants.SynthesisType.MIX 两种合成授权都通过
-                     */
                     @Override
                     public void onSuccess(BakerBaseConstants.SynthesisType synthesisType) {
                         if (synthesisType == BakerBaseConstants.SynthesisType.MIX || synthesisType == BakerBaseConstants.SynthesisType.OFFLINE) {
                             initOfflineEngine();
                         } else {
                             toast("可以合成，仅在线授权成功");
-                            HLogger.d("可以合成，仅在线授权成功");
                         }
                     }
 
                     @Override
                     public void onFailed(String errorMsg) {
                         toast("授权失败：" + errorMsg);
-                        HLogger.d("授权失败：" + errorMsg);
                     }
                 });
     }
@@ -124,35 +105,29 @@ public class SynthesisMixActivity extends BakerBaseActivity {
     private void initOfflineEngine() {
         runOnUiThread(() -> progressBar.setVisibility(View.VISIBLE));
 
-        String frontFile = Util.AssetsFileToString(this, "tts_entry_1.0.0_release_front_chn_eng_ser.dat");
-        String backFile = Util.AssetsFileToString(this, "tts_entry_1.0.0_release_back_chn_eng_hts_bb_f4180623_jm3_fix.dat");
+        String mFrontFile = Util.AssetsFileToString(SynthesisMixActivity.this, "tts_entry_1.0.0_release_front_chn_eng_ser.dat");
+        String mBackFile = Util.AssetsFileToString(SynthesisMixActivity.this, "tts_entry_1.0.0_release_back_chn_eng_hts_bb_f4180623_jm3_fix.dat");
 
-        //贝茹
-        String beiRu_Chn = Util.AssetsFileToString(this, "beiru/mix005007128_16k_DB-CN-F-04_chn9k_eng2k_mix2k_188k.pb.tflite.x");
-        String beiRu_Mgvocoder = Util.AssetsFileToString(this, "beiru/mg16000128_f4.pb.tflite.x");
-
-        //贝鹤
-        String beiHe_Chn = Util.AssetsFileToString(this, "beihe/mix005007128_16k_DB-CN-M-11_chn21k_175k.pb.tflite.x");
-        String beiHe_Mgvocoder = Util.AssetsFileToString(this, "beihe/mg16000128_m11.pb.tflite.x");
+        String mBeiRuMixPath = Util.AssetsFileToString(SynthesisMixActivity.this, "beiru/mix005007128_16k_DB-CN-F-04_chn9k_eng2k_mix2k_188k.pb.tflite.x");
+        String mBeiRuMgPath = Util.AssetsFileToString(SynthesisMixActivity.this, "beiru/mg16000128_f4.pb.tflite.x");
 
 
         List<BakerSpeaker> speakerList = new ArrayList<>();
-        speakerList.add(new BakerSpeaker(beiRu_Chn, beiRu_Mgvocoder));
-        speakerList.add(new BakerSpeaker(beiHe_Chn, beiHe_Mgvocoder));
-        SynthesisMixEngine.getInstance().secondInitMixEngine(new String[]{frontFile}, new String[]{backFile}, speakerList, new SynthesizerInitCallback() {
+        speakerList.add(new BakerSpeaker("beiru", mBeiRuMixPath, mBeiRuMgPath));
+
+
+        SynthesisMixEngine.getInstance().secondInitMixEngine(new String[]{mFrontFile}, new String[]{mBackFile}, speakerList, new SynthesizerInitCallback() {
             @Override
             public void onSuccess() {
                 dismissProgress();
                 showOfflineVoiceNameSpinner();
                 toast("授权和初始化成功");
-                HLogger.d("授权和初始化成功");
             }
 
             @Override
             public void onTaskFailed(BakerError error) {
                 dismissProgress();
                 toast("初始化失败：" + error.getCode() + ", " + error.getMessage() + ", " + error.getTrace_id());
-                HLogger.d("初始化失败：" + error.getCode() + ", " + error.getMessage() + ", " + error.getTrace_id());
             }
         });
     }
@@ -164,10 +139,11 @@ public class SynthesisMixActivity extends BakerBaseActivity {
         SharedPreferencesUtil.saveOnlineVoiceName(SynthesisMixActivity.this, voiceName);
         SynthesisMixEngine.getInstance().setVoiceNameOnline(voiceName);
         SynthesisMixEngine.getInstance().setOnLineConnectTimeOut(3);
-
         SynthesisMixEngine.getInstance().setVolume(5);
         SynthesisMixEngine.getInstance().setSpeed(5);
         SynthesisMixEngine.getInstance().setPitch(5);
+
+
     }
 
     public void onSynthesizerClick(View view) {
@@ -191,9 +167,10 @@ public class SynthesisMixActivity extends BakerBaseActivity {
         runOnUiThread(() -> progressBar.setVisibility(View.INVISIBLE));
     }
 
+    String[] speakerNames = new String[]{"beiru"};
+
     private void showOfflineVoiceNameSpinner() {
         runOnUiThread(() -> {
-            String[] speakerNames = new String[]{"贝茹", "贝鹤"};
             ArrayAdapter<String> adapter = new ArrayAdapter(SynthesisMixActivity.this, android.R.layout.simple_spinner_item, speakerNames);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinnerOfflineVoiceName.setAdapter(adapter);

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 
-import com.baker.tts.base.component.HLogger;
+
 
 import java.io.Closeable;
 import java.io.File;
@@ -12,6 +12,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -134,7 +135,6 @@ public class Util {
         if (!TextUtils.isEmpty(text) && !"null".equals(text)) {
             List<String> resultList = new ArrayList<>();
             split(resultList, text, 200);
-            HLogger.d("resultList.size()==" + resultList.size());
             return resultList;
         }
         return null;
@@ -161,4 +161,30 @@ public class Util {
     }
 
     private static final String GREP_SPLIT_PUNCTUATION_REGEX = ".*(，|。。。。。。|。|！|；|？|,|;|\\?|、)";
+
+
+    public static void clearDirectory(File dir) {
+        if (dir != null && dir.isDirectory()) {
+            String[] children = dir.list();
+            for (int i = 0; i < children.length; i++) {
+                File temp = new File(dir, children[i]);
+                if (temp.isDirectory()) {
+                    clearDirectory(temp);
+                } else {
+                    temp.delete();
+                }
+            }
+        } else if (dir != null && dir.isFile()) {
+            dir.delete(); // 如果 dir 直接是一个文件，则删除它
+        }
+    }
+    public static String dataFormat2(double value) {
+        DecimalFormat df = new DecimalFormat("#0.00");
+        return df.format(value);
+    }
+
+    public static String dataFormat5(double value) {
+        DecimalFormat df = new DecimalFormat("#0.000000");
+        return df.format(value);
+    }
 }

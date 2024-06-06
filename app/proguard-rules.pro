@@ -105,14 +105,20 @@
 
 
 -keepattributes Exceptions,InnerClasses,...
-#合成和基础库不混淆
--keep class com.baker.tts.online.**{*;}
--keep class com.baker.tts.base.component.**{*;}
--keep class com.baker.tts.offline.**{*;}
 
-#Mix相关
--keep public class com.baker.tts.mix.lib.SynthesisMixEngine{*;}
--keep public class com.baker.tts.mix.lib.callback.SynthesisMixAuthCallback{*;}
--keep public class com.baker.tts.mix.lib.callback.SynthesizerInitCallback{*;}
--keep public class com.baker.tts.mix.lib.callback.SynthesizerMixMediaCallback{*;}
--keep public class com.baker.tts.mix.lib.callback.SynthesisMixCallback{*;}
+
+#离在线合成
+-keeppackagenames com.baker.tts.base.component
+-keep class com.baker.tts.base.component.bean.**{*;}
+-keep class com.baker.tts.base.component.callback.**{*;}
+
+-keeppackagenames com.baker.tts.mix.lib
+-keep class com.baker.tts.mix.lib.callback.**{*;}
+
+-keeppackagenames com.baker.tts.offline
+-keep class com.baker.tts.offline.bean.**{*;}
+-keep class com.baker.tts.offline.callback.**{*;}
+
+-keeppackagenames com.baker.tts.online
+-keep class com.baker.tts.online.bean.**{*;}
+

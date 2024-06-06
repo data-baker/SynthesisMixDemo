@@ -3,13 +3,10 @@ package com.baker.tts.mix;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-
 import com.baker.tts.base.component.BakerBaseConstants;
-import com.baker.tts.base.component.HLogger;
 import com.baker.tts.base.component.bean.BakerError;
 import com.baker.tts.mix.lib.SynthesisMixEngine;
 import com.baker.tts.mix.lib.callback.SynthesisMixAuthCallback;
-import com.baker.tts.mix.lib.callback.SynthesisMixCallback;
 import com.baker.tts.mix.lib.callback.SynthesizerMixMediaCallback;
 
 import java.util.List;
@@ -41,27 +38,25 @@ public class SynthesisOnlineActivity extends BakerBaseActivity {
     private SynthesizerMixMediaCallback mediaCallback = new SynthesizerMixMediaCallback() {
         @Override
         public void onWarning(String warningCode, String warningMessage) {
-            HLogger.e("--onWarning--");
+
         }
 
         @Override
         public void playing() {
-            HLogger.e("--playing--");
+
         }
 
         @Override
         public void noPlay() {
-            HLogger.e("--noPlay--");
         }
 
         @Override
         public void onCompletion() {
-            HLogger.e("--onCompletion--");
+
         }
 
         @Override
         public void onError(BakerError error) {
-            HLogger.e("--onError--" + error.getCode() + ", " + error.getMessage());
             toast(error.getCode() + ", " + error.getMessage());
         }
     };
@@ -80,13 +75,12 @@ public class SynthesisOnlineActivity extends BakerBaseActivity {
                     @Override
                     public void onSuccess(BakerBaseConstants.SynthesisType synthesisType) {
                         toast("授权成功");
-                        HLogger.d("授权成功");
+
                     }
 
                     @Override
                     public void onFailed(String errorMsg) {
                         toast("授权失败：" + errorMsg);
-                        HLogger.d("授权失败：" + errorMsg);
                     }
                 });
     }
